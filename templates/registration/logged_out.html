@@ -1,0 +1,11 @@
+{% extends 'basebs.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="text-center">
+        <h1 class="display-4">Sei stato disconnesso!</h1>
+        <p class="lead">Hai effettuato il logout con successo. Puoi tornare alla home o accedere di nuovo.</p>
+        <a class="btn btn-outline-success btn-lg" href="{% url 'home' %}">Torna alla Home</a>
+        <a class="btn btn-outline-secondary btn-lg ml-2" href="{% url 'login' %}">Accedi di nuovo</a>
+    </div>
+</div>
+{% endblock %}

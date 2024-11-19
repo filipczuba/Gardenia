@@ -1,0 +1,65 @@
+{% extends 'basebs.html' %}
+{% load static %}
+{% block title%} Home {% endblock%}
+{% block content %}
+<head>
+    <!-- Add Font Awesome CDN link in the head section of basebs.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<div class="container mt-5">
+    <div class="row">
+        {% for post in posts %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ post.image.url }}" class="card-img-top" alt="Immagine della Proprietà">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.description|truncatechars:80 }}</p>
+                        <p class="card-text"><small class="text-muted">{{ post.address }}</small></p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                Servizi: 
+                                {% if post.wifi %}
+                                    WiFi{% if post.bathroom or post.bbq or post.pool or post.kid_friendly or post.parking or post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.bathroom %}
+                                    Bagno{% if post.bbq or post.pool or post.kid_friendly or post.parking or post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.bbq %}
+                                    BBQ{% if post.pool or post.kid_friendly or post.parking or post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.pool %}
+                                    Piscina{% if post.kid_friendly or post.parking or post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.kid_friendly %}
+                                    Adatto ai Bambini{% if post.parking or post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.parking %}
+                                    Parcheggio nelle Vicinanze{% if post.electricity %}, {% endif %}
+                                {% endif %}
+                                {% if post.electricity %}
+                                    Elettricità
+                                {% endif %}
+                            </small>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">
+                                <i class="fas fa-user"></i> {{ post.max_people }} - 
+                                <i class="fas fa-euro-sign"></i> {{ post.price_per_person }}
+                            </small>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+                        <a href={% url 'post_detail' post.pk%} class="btn btn-outline-secondary">Visualizza Dettagli</a>
+                        {% if user.is_authenticated and user.user_type == 'renter' %}
+                            <a href="{% url 'rent_request_create' post.pk %}" class="btn btn-success">Prenota</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Nessuna proprietà disponibile al momento.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

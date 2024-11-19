@@ -1,0 +1,22 @@
+{% extends 'basebs.html' %}
+{% block title%}Recensisci{% endblock%}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        {% for rent_request in rent_requests %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <img src="{{ rent_request.post.image.url }}" class="card-img-top" alt="Property Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ rent_request.post.title }}</h5>
+                        <p class="card-text">{{ rent_request.post.description|truncatechars:80 }}</p>
+                        <a href="{% url 'review_create' rent_request_id=rent_request.id %}" class="btn btn-outline-success">Recensisci</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Nulla da recensire!</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

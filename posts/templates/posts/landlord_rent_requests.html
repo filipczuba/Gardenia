@@ -1,0 +1,54 @@
+{% extends 'basebs.html' %}
+
+{% block title %}Gestisci richieste nolleggio{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+    {% if messages %}
+    <ul>
+    {% for message in messages %}
+        <li class="alert alert-danger">{{ message }}</li>
+    {% endfor %}
+    </ul>
+   {% endif %}
+        {% if rent_requests %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Proprietà</th>
+                        <th>Affittuario</th>
+                        <th>Inizio</th>
+                        <th>Fine</th>
+                        <th>Stato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for request in rent_requests %}
+                        <tr>
+                            <td><a href={% url 'post_detail' request.post.pk%} style="color: #398b49;">{{ request.post.title }}</a></td>
+                            <td>{{ request.renter.email }}</td>
+                            <td>{{ request.start_date }}</td>
+                            <td>{{ request.end_date }}</td>
+                            <td>
+                                {% if request.status == 'pending' %}
+                                    <a href="{% url 'approve_rent_request' request.pk %}" class="btn btn-success btn-sm">Accetta</a>
+                                    <a href="{% url 'reject_rent_request' request.pk %}" class="btn btn-danger btn-sm">Rifiuta</a>
+                                {% else %}
+                                   {% if request.status == 'pending' %}
+                                    <span class="badge badge-warning">In attesa</span>
+                                {% elif request.status == 'approved' %}
+                                    <span class="badge badge-success">Approvata</span>
+                                {% elif request.status == 'rejected' %}
+                                    <span class="badge badge-danger">Rifiutata</span>
+                                {% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Non è ancora presente alcuna richiesta!</p>
+        {% endif %}
+    </div>
+{% endblock %}

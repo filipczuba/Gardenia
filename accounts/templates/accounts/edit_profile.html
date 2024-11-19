@@ -1,0 +1,32 @@
+{% extends 'basebs.html' %}
+{% load crispy_forms_tags%}
+
+{% block title %}Modifica Profilo{% endblock %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 500px; 
+        width: 100%;
+        background-color: #f6f7f9; 
+        color: #333; 
+        border: 2px solid #398b49;
+        border-radius: 15px; 
+        padding: 20px; 
+    }
+  </style>
+<div class="container mt-5">
+    <div class="container d-flex justify-content-center mt-5 my-3">
+        <div class="form-container p-4 rounded">
+    <h2 style="color:#398b49;">Modifica il tuo Profilo</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy}}
+        <button type="submit" class="btn btn-outline-success">Salva modifiche</button>
+        <a class="btn btn-outline-secondary my-2 my-sm-0" href="{% url 'home' %}">Cancella</a>
+    </form>
+    
+</div>
+</div>
+</div>
+{% endblock %}

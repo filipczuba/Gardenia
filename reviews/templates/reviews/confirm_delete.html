@@ -1,0 +1,17 @@
+<!-- templates/reviews/confirm_delete.html -->
+
+{% extends 'basebs.html' %}
+{% block title%}Recensisci{% endblock%}
+{% block content %}
+<div class="container mt-5">
+    <h2>Conferma</h2>
+    <p>Sei sicuro di eliminare questa recensione?</p>
+    <p><strong></strong> {{ review.rating }} / 5</p>
+    <p><strong></strong> {{ review.review_text }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Elimina</button>
+        <a href="{% url 'landlord_reviews' %}" class="btn btn-secondary">Annulla</a>
+    </form>
+</div>
+{% endblock %}

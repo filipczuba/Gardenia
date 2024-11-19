@@ -1,0 +1,31 @@
+<!-- templates/reviews/user_reviews.html -->
+
+{% extends 'basebs.html' %}
+{% block title%}Le tue recensioni{% endblock%}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Le tue recensioni</h2>
+    {% if reviews %}
+        <div class="list-group">
+            {% for review in reviews %}
+            <div class="list-group-item">
+                <div>
+                    <h5 class="mb-1">{{ review.rating }} / 5</h5>
+                    <p class="mb-1">{{ review.review_text }}</p>
+                    <small>Proprietà: {{ review.post.title }}</small><br>
+                    <small>Data: {{ review.created_at|date:"d M Y" }}</small>
+                    
+                </div>
+                <div>
+                    <a href="{% url 'edit_review' review.pk %}" class="btn btn-warning btn-sm">Modifica</a>
+                    <a href="{% url 'delete_review' review.pk %}" class="btn btn-danger btn-sm">Elimina</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+        <p class="text-muted">Non hai ancora recensito nulla!</p>
+    {% endif %}
+</div>
+{% endblock %}

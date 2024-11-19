@@ -1,0 +1,50 @@
+{% extends 'basebs.html' %}
+
+{% block title %}Nolleggia{{ post.title }}{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style>
+    .form-container {
+        max-width: 500px; 
+        width: 100%;
+        background-color: #f6f7f9; 
+        color: #333; 
+        border: 2px solid #398b49;
+        border-radius: 15px; 
+        padding: 20px; 
+    }
+    
+    .button-group {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .button-group .btn {
+        margin-right: 10px;
+    }
+    
+    .button-group .btn:last-child {
+        margin-right: 0;
+    }
+</style>
+
+<div class="container d-flex justify-content-center mt-5 my-3">
+    <div class="form-container p-4 rounded">
+        <h2 class="text-center mb-4">Nolleggia {{ post.title }}</h2>
+        
+        <form method="post" class="text-center">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="button-group mt-3">
+                <button type="submit" class="btn btn-outline-success mr-2">Manda richiesta</button>
+                <a class="btn btn-outline-secondary" href="{% url 'home' %}">Annulla</a>
+            </div>
+        </form>
+        
+        
+    </div>
+</div>
+{% endblock %}

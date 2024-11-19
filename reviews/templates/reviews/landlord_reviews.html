@@ -1,0 +1,24 @@
+<!-- templates/reviews/landlord_reviews.html -->
+
+{% extends 'basebs.html' %}
+{% block title%}Le tue recensioni{% endblock%}
+{% block content %}
+<div class="container mt-5">
+    <h2>Recensioni ricevuta</h2>
+    {% if reviews %}
+        <div class="list-group">
+            {% for review in reviews %}
+                <div class="list-group-item">
+                    <h5 class="mb-1">:{{ review.rating }} / 5</h5>
+                    <p class="mb-1">{{ review.review_text }}</p>
+                    <small>Proprietà: {{ review.post.title }}</small><br>
+                    <small>Data: {{ review.created_at|date:"d M Y" }}</small><br>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">Nessuna delle tue proprietà sono ancora state recensite!</p>
+    {% endif %}
+</div>
+{% endblock %}

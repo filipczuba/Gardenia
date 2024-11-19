@@ -1,0 +1,78 @@
+<!-- templates/posts/post_detail.html -->
+
+{% extends 'basebs.html' %}
+{% load static %}
+{% block title%} {{post.title}} {% endblock%}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+<div class="container mt-5">
+    <div class="card mb-3" style="max-width: 800px; margin: auto;">
+        <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="{{ post.image.url }}" class="card-img" alt="{{ post.title }}" style="object-fit: cover; height: 100%;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">{{ post.title }}</h2>
+                    <p class="card-text"><strong>Indirizzo:</strong> {{ post.address }}</p>
+                    <p class="card-text"><strong>Descrizione:</strong> {{ post.description }}</p>
+                    <div class="mb-3">
+                        <h5>Servizi:</h5>
+                        <ul class="list-unstyled">
+                            {% if post.wifi %}
+                                <li><i class="bi bi-wifi"></i> WiFi</li>
+                            {% endif %}
+                            {% if post.bathroom %}
+                                <li><i class="bi bi-badge-wc"></i> Bagno</li>
+                            {% endif %}
+                            {% if post.bbq %}
+                                <li><i class="bi bi-house-door"></i> BBQ</li>
+                            {% endif %}
+                            {% if post.pool %}
+                                <li><i class="bi bi-water"></i> Piscina</li>
+                            {% endif %}
+                            {% if post.kid_friendly %}
+                                <li><i class="bi bi-people"></i> Adatto ai Bambini</li>
+                            {% endif %}
+                            {% if post.parking %}
+                                <li><i class="bi bi-car-front"></i> Parcheggio nelle Vicinanze</li>
+                            {% endif %}
+                            {% if post.electricity %}
+                                <li><i class="bi bi-lightbulb"></i> Elettricità</li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <p class="card-text"><strong>Max persone:</strong> {{ post.max_people }}</p>
+                    <p class="card-text"><strong>Prezzo per persona:</strong> {{ post.price_per_person }} €</p>
+                </div>
+                <div class="card-footer">
+                    {% if user.is_authenticated and user.user_type == 'renter' %}
+                        <a href="{% url 'rent_request_create' post.pk %}" class="btn btn-success">Prenota</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="container mt-4">
+        <h3>Recensioni</h3>
+        {% if reviews %}
+            <div class="list-group">
+                {% for review in reviews %}
+                    <div class="list-group-item">
+                        <h5 class="mb-1"> {{ review.rating }} / 5</h5>
+                        <p class="mb-1">{{ review.review_text }}</p>
+                        <small>Recensito da: {{ review.renter }}</small>
+                        <br>
+                        <small>Data: {{ review.created_at|date:"d M Y" }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-muted">Nessuna recensione ancora!</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

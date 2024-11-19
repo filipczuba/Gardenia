@@ -1,0 +1,14 @@
+<!-- templates/reviews/edit_review.html -->
+
+{% extends 'basebs.html' %}
+{% block title%}Recensisci{% endblock%}
+{% block content %}
+<div class="container mt-5">
+    <h2>Modifica la Recensione</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-success">Salva</button>
+    </form>
+</div>
+{% endblock %}

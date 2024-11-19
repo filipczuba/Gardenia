@@ -1,0 +1,41 @@
+{% extends 'basebs.html' %}
+
+{% block title %}Le mie prenotazioni{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        
+        {% if bookings %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Proprietà</th>
+                        <th>Inizio</th>
+                        <th>Fine</th>
+                        <th>Stato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td><a href={% url 'post_detail' booking.post.pk%} style="color: #398b49;">{{ booking.post.title }}</a></td>
+                            <td>{{ booking.start_date }}</td>
+                            <td>{{ booking.end_date }}</td>
+                            <td>
+                                {% if booking.status == 'pending' %}
+                                    <span class="badge badge-warning">In attesa</span>
+                                {% elif booking.status == 'approved' %}
+                                    <span class="badge badge-success">Approvata</span>
+                                {% elif booking.status == 'rejected' %}
+                                    <span class="badge badge-danger">Rifiutata</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Non hai ancora prenotato nulla!</p>
+        {% endif %}
+    </div>
+{% endblock %}
