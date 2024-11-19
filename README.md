@@ -1,5 +1,10 @@
 # Gardenia - Green Sharing Web Application
-![Gardenia Logo](/media/assets/logo.png)
+
+<div align="center">
+    <img src="/media/assets/logo.png" alt="Gardenia Logo" title="Gardenia Green Sharing Platform">
+   <img src="/media/assets/text.png" alt="Gardenia Logo" title="Gardenia Green Sharing Platform">
+</div
+
 ## Project Overview
 Gardenia is a web application designed for green sharing, allowing users to rent and share outdoor spaces like gardens and terraces. Built with Django, the platform enables property owners (Landlords) to list their spaces and renters to book them.
 
