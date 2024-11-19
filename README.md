@@ -7,7 +7,11 @@
 
 ## Project Overview
 Gardenia is a web application designed for green sharing, allowing users to rent and share outdoor spaces like gardens and terraces. Built with Django, the platform enables property owners (Landlords) to list their spaces and renters to book them.
-
+<div align="center">
+    <img src="Picture 1.png" alt="PIC">
+    <img src="Picture 2.png" alt="PIC">
+    <img src="Picture 3.png" alt="PIC">
+</div
 ## Technical Stack
 - **Backend**: Django Framework
 - **Database**: SQLite3
