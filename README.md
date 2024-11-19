@@ -12,6 +12,7 @@ Gardenia is a web application designed for green sharing, allowing users to rent
     <img src="Picture 2.png" alt="PIC">
     <img src="Picture 3.png" alt="PIC">
 </div>
+
 ## Technical Stack
 - **Backend**: Django Framework
 - **Database**: SQLite3
